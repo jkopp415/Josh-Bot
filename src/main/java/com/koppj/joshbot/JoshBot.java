@@ -1,82 +1,64 @@
 package com.koppj.joshbot;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.utils.FileUpload;
 
 public class JoshBot extends ListenerAdapter
 {
-	private static final String TOKEN = "MTA1MDUyNzAwOTA5ODQ0OTA0OQ.GMOaT0.rMxEykjRulTr-VTcO7BHMOiXhiNd8tMW9HkB2E";
+	private static ClassLoader loader;						// Loads assets from the classpath
 	
-	private static File usersList;
-	private static File keywordsList;
-	private static File catImg;
+	private static Configuration config;					// The config object
+	private static boolean devMode;							// The developer mode flag
+	
+	private static String token;							// The bot's token
+	private static boolean enableComeBot;					// The Come Bot flag
+	private static boolean enableSpaceFactsBot;				// The Space Facts Bot flag
+	
+	private static JDA joshBot;
 	
 	public static void main(String[] args) throws Exception
 	{
-		usersList = new File("src/main/resources/users.txt");
-		keywordsList = new File("src/main/resources/keywords.txt");
-		catImg = new File("src/main/resources/nerd_cat.jpg");
+		// Initialize the class loader
+		loader = JoshBot.class.getClassLoader();
 		
-		@SuppressWarnings("unused")
-		JDA josh_bot = JDABuilder.createDefault(TOKEN)
-				.addEventListeners(new JoshBot())
-				.enableIntents(GatewayIntent.MESSAGE_CONTENT)
-				.build();
-	}
-	
-	@Override
-	public void onMessageReceived(MessageReceivedEvent event)
-	{
-		User user = event.getAuthor();
-		if (user.isBot()) return;
-		
-		Message message = event.getMessage();
-		String content = message.getContentRaw();
-		
-		if (checkFile(user.getName(), usersList) && checkFile(content, keywordsList))
-		{
-			message.replyFiles(FileUpload.fromData(catImg)).queue();
-		}
-	}
-	
-	private boolean checkFile(String word, File file)
-	{
-		BufferedReader reader;
-		
-		try 
-		{
-			reader = new BufferedReader(new FileReader(file));
-			String line = reader.readLine();
-			
-			while (line != null)
-			{
-				if (line.equals(word))
-				{
-					reader.close();
-					return true;
-				}
-				
-				line = reader.readLine();
-			}
-			
-			reader.close();
-		} 
-		catch (IOException e) 
-		{
+		// Get the config file from the classpath
+		try {
+			File configFile = Paths.get(loader.getResource("config.properties").toURI()).toFile();
+			config = new Configurations().properties(configFile);
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 		
-		return false;
+		// Read in some of the basic configs
+		token = config.getString("joshbot.token");
+		devMode = config.getBoolean("joshbot.devmode");	
+		enableComeBot = config.getBoolean("joshbot.enablecomebot");
+		enableSpaceFactsBot = config.getBoolean("joshbot.enablespacefactsbot");
+		
+		// Create the bot with the token, giving it the MESSAGE_CONTENT intent
+		joshBot = JDABuilder.createLight(token)
+				.addEventListeners(new SimpleCommands())
+				.enableIntents(GatewayIntent.MESSAGE_CONTENT)
+				.build();
+		
+		// Enable Come Bot based on the flag in the config
+		if (enableComeBot) joshBot.addEventListener(new ComeBot());
+		
+		// Enable Space Facts Bot based on the flag in the config
+		if (enableSpaceFactsBot) joshBot.addEventListener(new SpaceFactsBot());
 	}
+	
+	public static InputStream getAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
+	
+	public static boolean isDevMode() { return devMode; }
+	
+	public static void shutdownBot() { joshBot.shutdown(); }
 }
