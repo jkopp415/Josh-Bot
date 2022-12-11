@@ -13,12 +13,6 @@ public class BotPing extends ListenerAdapter
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
-		// Get the user that sent the message
-		User user = event.getAuthor();
-		
-		// Check if the bot is in dev mode
-		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
-		
 		// Create a list of users mentioned in the message
 		List<User> mentionedUsers = event.getMessage().getMentions().getUsers();
 		

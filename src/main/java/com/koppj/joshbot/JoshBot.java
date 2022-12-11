@@ -14,8 +14,7 @@ public class JoshBot
 	private static Configuration config;					// The config object
 	
 	private static String token;							// The bot's token
-	private static String userId;							// The bot's user id 
-	private static boolean devMode;							// The developer mode flag
+	private static String userId;							// The bot's user id
 	private static String devName;							// The developer's username
 	private static boolean enableComeBot;					// The Come Bot flag
 	private static boolean enableBotPing;					// The bot ping flag
@@ -36,7 +35,6 @@ public class JoshBot
 		// Read in some of the basic configs
 		token = config.getString("joshbot.token");
 		userId = config.getString("joshbot.userid");
-		devMode = config.getBoolean("joshbot.devmode");
 		devName = config.getString("joshbot.devname");
 		enableComeBot = config.getBoolean("joshbot.enablecomebot");
 		enableBotPing = config.getBoolean("joshbot.enablebotping");
@@ -59,8 +57,6 @@ public class JoshBot
 	public static JDA getJoshBot() { return joshBot; }
 	
 	public static String getUserId() { return userId; }
-	
-	public static boolean isDevMode() { return devMode; }
 	
 	public static String getDevName() { return devName; }
 	
