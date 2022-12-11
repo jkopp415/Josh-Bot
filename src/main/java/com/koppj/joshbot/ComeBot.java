@@ -34,9 +34,8 @@ public class ComeBot extends ListenerAdapter
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
-		// Get the user that sent the message and make sure they're not a bot
+		// Get the user that sent the message
 		User user = event.getAuthor();
-		if (user.isBot()) return;
 		
 		// Check if the bot is in dev mode
 		if (JoshBot.isDevMode() && !user.getName().equals("jkopp415")) return;
