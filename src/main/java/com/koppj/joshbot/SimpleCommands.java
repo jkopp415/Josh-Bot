@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 public class SimpleCommands extends ListenerAdapter
 {
@@ -30,7 +31,8 @@ public class SimpleCommands extends ListenerAdapter
 		else if (content.equals("!joshshutdown") && user.getName().equals(JoshBot.getDevName()))
 		{
 			InputStream goodbyeCatStream = JoshBot.loadAsset("assets/goodbye_cat.jpg");
-			event.getChannel().sendMessage("Shutting down. Bye!").addFile(goodbyeCatStream, "goodbye_cat.jpg").queue();
+			event.getChannel().sendMessage("Shutting down. Bye!")
+				.addFiles(FileUpload.fromData(goodbyeCatStream, "goodbye_cat.jpg")).queue();
 			JoshBot.shutdownBot();
 		}
 	}

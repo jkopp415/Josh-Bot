@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 public class ComeBot extends ListenerAdapter
 {	
@@ -46,7 +47,7 @@ public class ComeBot extends ListenerAdapter
 		if (checkComeWords(content))
 		{
 			InputStream nerdCatStream = JoshBot.loadAsset("assets/nerd_cat.jpg");
-			message.reply(nerdCatStream, "nerd_cat.jpg").queue();
+			message.replyFiles(FileUpload.fromData(nerdCatStream, "nerd_cat.jpg")).queue();
 		}
 	}
 	

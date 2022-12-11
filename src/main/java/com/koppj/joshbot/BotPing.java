@@ -6,6 +6,7 @@ import java.util.List;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 public class BotPing extends ListenerAdapter
 {
@@ -19,7 +20,7 @@ public class BotPing extends ListenerAdapter
 		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
 		
 		// Create a list of users mentioned in the message
-		List<User> mentionedUsers = event.getMessage().getMentionedUsers();
+		List<User> mentionedUsers = event.getMessage().getMentions().getUsers();
 		
 		for (User mentionedUser : mentionedUsers)
 		{
@@ -27,7 +28,7 @@ public class BotPing extends ListenerAdapter
 			if (mentionedUser.getDiscriminator().equals(JoshBot.getUserId()))
 			{
 				InputStream whoPingedMeStream = JoshBot.loadAsset("assets/who_pinged_me.gif");
-				event.getMessage().reply(whoPingedMeStream, "who_pinged_me.gif").queue();
+				event.getMessage().replyFiles(FileUpload.fromData(whoPingedMeStream, "who_pinged_me.gif")).queue();
 			}
 		}
 	}
