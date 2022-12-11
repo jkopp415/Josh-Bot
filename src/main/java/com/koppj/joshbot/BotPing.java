@@ -17,7 +17,7 @@ public class BotPing extends ListenerAdapter
 		User user = event.getAuthor();
 		
 		// Check if the bot is in dev mode
-		if (JoshBot.isDevMode() && !user.getName().equals("jkopp415")) return;
+		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
 		
 		// Create a list of users mentioned in the message
 		List<User> mentionedUsers = event.getMessage().getMentions().getUsers();

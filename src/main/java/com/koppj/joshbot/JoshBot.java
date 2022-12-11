@@ -16,6 +16,7 @@ public class JoshBot
 	private static String token;							// The bot's token
 	private static String userId;							// The bot's user id 
 	private static boolean devMode;							// The developer mode flag
+	private static String devName;							// The developer's username
 	private static boolean enableComeBot;					// The Come Bot flag
 	private static boolean enableSpaceFactsBot;				// The Space Facts Bot flag
 	private static boolean enableBotPing;					// The bot ping flag
@@ -37,7 +38,8 @@ public class JoshBot
 		// Read in some of the basic configs
 		token = config.getString("joshbot.token");
 		userId = config.getString("joshbot.userid");
-		devMode = config.getBoolean("joshbot.devmode");	
+		devMode = config.getBoolean("joshbot.devmode");
+		devName = config.getString("joshbot.devname");
 		enableComeBot = config.getBoolean("joshbot.enablecomebot");
 		enableSpaceFactsBot = config.getBoolean("joshbot.enablespacefactsbot");
 		enableBotPing = config.getBoolean("joshbot.enablebotping");
@@ -58,11 +60,13 @@ public class JoshBot
 		if (enableBotPing) joshBot.addEventListener(new BotPing());
 	}
 	
-	public static InputStream loadAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
-	
 	public static String getUserId() { return userId; }
 	
 	public static boolean isDevMode() { return devMode; }
+	
+	public static String getDevName() { return devName; }
+	
+	public static InputStream loadAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
 	
 	public static void shutdownBot() { joshBot.shutdown(); }
 }

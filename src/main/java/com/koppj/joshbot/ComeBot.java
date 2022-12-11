@@ -37,7 +37,7 @@ public class ComeBot extends ListenerAdapter
 		User user = event.getAuthor();
 		
 		// Check if the bot is in dev mode
-		if (JoshBot.isDevMode() && !user.getName().equals("jkopp415")) return;
+		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
 		
 		// Store the messsage and content
 		Message message = event.getMessage();

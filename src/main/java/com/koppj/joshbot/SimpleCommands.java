@@ -17,7 +17,7 @@ public class SimpleCommands extends ListenerAdapter
 		if (user.isBot()) return;
 		
 		// Check if the bot is in dev mode
-		if (JoshBot.isDevMode() && !user.getName().equals("jkopp415")) return;
+		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
 		
 		// Store the messsage and content
 		Message message = event.getMessage();
@@ -28,7 +28,7 @@ public class SimpleCommands extends ListenerAdapter
 			message.reply("Pong!").queue();
 		
 		// Shuts the bot down
-		else if (content.equals("!joshshutdown") && user.getName().equals("jkopp415"))
+		else if (content.equals("!joshshutdown") && user.getName().equals(JoshBot.getDevName()))
 		{
 			InputStream goodbyeCatStream = JoshBot.loadAsset("assets/goodbye_cat.jpg");
 			event.getChannel().sendMessage("Shutting down. Bye!")
