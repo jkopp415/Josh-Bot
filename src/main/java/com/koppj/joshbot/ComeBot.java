@@ -15,17 +15,16 @@ import net.dv8tion.jda.api.utils.FileUpload;
 public class ComeBot extends ListenerAdapter
 {	
 	private static List<String> comeWords;					// The list of come words
-	private static InputStream nerdCatImg;							// The cat image response
 	
 	public ComeBot()
 	{
 		// Load in the different assets from the classpath
-		InputStream comeWordsFile = JoshBot.getAsset("assets/come_words.txt");
-		nerdCatImg = JoshBot.getAsset("assets/nerd_cat.jpg");
+		InputStream comeWordsStream = JoshBot.loadAsset("assets/come_words.txt");
 		
 		// Read the come words to the comeWords list
 		try {
-			comeWords = IOUtils.readLines(comeWordsFile, StandardCharsets.UTF_8);
+			comeWords = IOUtils.readLines(comeWordsStream, StandardCharsets.UTF_8);
+			comeWordsStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -46,7 +45,10 @@ public class ComeBot extends ListenerAdapter
 		
 		// If the content matches any of the come words, reply with the cat image
 		if (checkComeWords(content))
-			message.replyFiles(FileUpload.fromData(nerdCatImg, "nerd_cat.jpg")).queue();
+		{
+			InputStream nerdCatStream = JoshBot.loadAsset("assets/nerd_cat.jpg");
+			message.replyFiles(FileUpload.fromData(nerdCatStream, "nerd_cat.jpg")).queue();
+		}
 	}
 	
 	// Compares the input with all of the words in the come words list

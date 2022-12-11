@@ -6,21 +6,25 @@
   	<name>Josh Bot</name>
 	
 	<dependencies>
+		
 	  	<dependency>
 		    <groupId>net.dv8tion</groupId>
 		    <artifactId>JDA</artifactId>
 		    <version>5.0.0-beta.1</version>
 	  	</dependency>
+	  	
 	  	<dependency>
     		<groupId>org.apache.commons</groupId>
     		<artifactId>commons-configuration2</artifactId>
     		<version>2.8.0</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>commons-beanutils</groupId>
 		    <artifactId>commons-beanutils</artifactId>
 		    <version>1.9.4</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
@@ -28,5 +32,45 @@
 		</dependency>
 		
 	</dependencies>
+	
+	<build>
+		<plugins>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>com.koppj.joshbot.JoshBot</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.4.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
 	
 </project>

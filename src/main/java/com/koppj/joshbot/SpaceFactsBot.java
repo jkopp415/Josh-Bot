@@ -19,10 +19,11 @@ public class SpaceFactsBot extends ListenerAdapter
 	
 	public SpaceFactsBot()
 	{
-		InputStream spaceFactsFile = JoshBot.getAsset("assets/space_facts.txt");
+		InputStream spaceFactsStream = JoshBot.loadAsset("assets/space_facts.txt");
 		
 		try {
-			spaceFacts = IOUtils.readLines(spaceFactsFile, StandardCharsets.UTF_8);
+			spaceFacts = IOUtils.readLines(spaceFactsStream, StandardCharsets.UTF_8);
+			spaceFactsStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

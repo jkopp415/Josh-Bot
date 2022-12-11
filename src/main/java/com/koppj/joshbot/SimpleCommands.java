@@ -9,14 +9,6 @@ import net.dv8tion.jda.api.utils.FileUpload;
 
 public class SimpleCommands extends ListenerAdapter
 {
-	private static InputStream goodbyeCatImg;				// The image the bot sends when it gets shutdown
-	
-	public SimpleCommands()
-	{
-		// Load in the goodbye cat image for bot shutdown
-		goodbyeCatImg = JoshBot.getAsset("assets/goodbye_cat.jpg");
-	}
-	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
@@ -38,8 +30,9 @@ public class SimpleCommands extends ListenerAdapter
 		// Shuts the bot down
 		else if (content.equals("!joshshutdown") && user.getName().equals("jkopp415"))
 		{
+			InputStream goodbyeCatStream = JoshBot.loadAsset("assets/goodbye_cat.jpg");
 			event.getChannel().sendMessage("Shutting down. Bye!")
-				.addFiles(FileUpload.fromData(goodbyeCatImg, "goodbye_cat.jpg")).queue();
+				.addFiles(FileUpload.fromData(goodbyeCatStream, "goodbye_cat.jpg")).queue();
 			JoshBot.shutdownBot();
 		}
 	}

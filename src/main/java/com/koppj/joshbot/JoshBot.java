@@ -2,23 +2,19 @@ package com.koppj.joshbot;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
-public class JoshBot extends ListenerAdapter
+public class JoshBot
 {
-	private static ClassLoader loader;						// Loads assets from the classpath
-	
+	private static File configFile;							// The config file
 	private static Configuration config;					// The config object
-	private static boolean devMode;							// The developer mode flag
 	
 	private static String token;							// The bot's token
+	private static boolean devMode;							// The developer mode flag
 	private static boolean enableComeBot;					// The Come Bot flag
 	private static boolean enableSpaceFactsBot;				// The Space Facts Bot flag
 	
@@ -26,16 +22,15 @@ public class JoshBot extends ListenerAdapter
 	
 	public static void main(String[] args) throws Exception
 	{
-		// Initialize the class loader
-		loader = JoshBot.class.getClassLoader();
-		
-		// Get the config file from the classpath
+		// TODO: Better error handling here
+		// Open the config file
 		try {
-			File configFile = Paths.get(loader.getResource("config.properties").toURI()).toFile();
+			configFile = new File("config.properties");
 			config = new Configurations().properties(configFile);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		}  catch (NullPointerException e) {
+			System.out.println("config.properties not found.");
 		}
+		
 		
 		// Read in some of the basic configs
 		token = config.getString("joshbot.token");
@@ -56,7 +51,7 @@ public class JoshBot extends ListenerAdapter
 		if (enableSpaceFactsBot) joshBot.addEventListener(new SpaceFactsBot());
 	}
 	
-	public static InputStream getAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
+	public static InputStream loadAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
 	
 	public static boolean isDevMode() { return devMode; }
 	
