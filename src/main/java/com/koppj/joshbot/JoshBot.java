@@ -6,7 +6,11 @@ import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 public class JoshBot
 {
@@ -46,9 +50,10 @@ public class JoshBot
 		
 		// Create the bot with the token, giving it the MESSAGE_CONTENT intent
 		joshBot = JDABuilder.createLight(token)
-				.addEventListeners(new SimpleCommands())
 				.enableIntents(GatewayIntent.MESSAGE_CONTENT)
 				.build();
+		
+		joshBot.addEventListener(new BotCommands());
 		
 		// Enable Come Bot based on the flag in the config
 		if (enableComeBot) joshBot.addEventListener(new ComeBot());
@@ -59,6 +64,8 @@ public class JoshBot
 		// Enable bot ping based on the flag in the config
 		if (enableBotPing) joshBot.addEventListener(new BotPing());
 	}
+	
+	public static JDA getJoshBot() { return joshBot; }
 	
 	public static String getUserId() { return userId; }
 	

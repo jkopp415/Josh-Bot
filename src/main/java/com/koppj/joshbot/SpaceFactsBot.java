@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class SpaceFactsBot extends ListenerAdapter
-{
+{	
 	private static List<String> spaceFacts;
 	
 	public SpaceFactsBot()
@@ -29,25 +29,31 @@ public class SpaceFactsBot extends ListenerAdapter
 		}
 	}
 	
-	@Override
-	public void onMessageReceived(MessageReceivedEvent event)
+//	@Override
+//	public void onMessageReceived(MessageReceivedEvent event)
+//	{
+//		// Get the user that sent the message and make sure they're not a bot
+//		User user = event.getAuthor();
+//		if (user.isBot()) return;
+//		
+//		// Check if the bot is in dev mode
+//		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
+//		
+//		// Store the messsage and content
+//		Message message = event.getMessage();
+//		String content = message.getContentRaw();
+//		
+//		if (content.equals("!joshspacefact"))
+//		{
+//			Random rand = new Random();
+//			int randInt = rand.nextInt(spaceFacts.size());
+//			message.reply(spaceFacts.get(randInt)).queue();
+//		}
+//	}
+	
+	public static String getRandomSpaceFact()
 	{
-		// Get the user that sent the message and make sure they're not a bot
-		User user = event.getAuthor();
-		if (user.isBot()) return;
-		
-		// Check if the bot is in dev mode
-		if (JoshBot.isDevMode() && !user.getName().equals(JoshBot.getDevName())) return;
-		
-		// Store the messsage and content
-		Message message = event.getMessage();
-		String content = message.getContentRaw();
-		
-		if (content.equals("!joshspacefact"))
-		{
-			Random rand = new Random();
-			int randInt = rand.nextInt(spaceFacts.size());
-			message.reply(spaceFacts.get(randInt)).queue();
-		}
+		int randInt = (int)(Math.random() * spaceFacts.size());
+		return spaceFacts.get(randInt);
 	}
 }
