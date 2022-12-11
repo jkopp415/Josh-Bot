@@ -29,7 +29,7 @@ public class BotCommands extends ListenerAdapter
 		if (event.getName().equals("joshshutdown"))
 		{
 			// If the user is not the dev, don't let them shut the bot down
-			if (!event.getUser().getName().equals(JoshBot.getDevName()))
+			if (!event.getUser().getName().equals(JoshBot.getShutdownUser()))
 			{
 				event.reply("You don't have the right permissions, stop it.").setEphemeral(true).queue();
 				return;

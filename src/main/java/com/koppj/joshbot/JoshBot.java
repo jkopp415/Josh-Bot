@@ -15,7 +15,7 @@ public class JoshBot
 	
 	private static String token;							// The bot's token
 	private static String userId;							// The bot's user id
-	private static String devName;							// The developer's username
+	private static String shutdownUser;						// The username of who is allowed to shut the bot down
 	private static boolean enableComeBot;					// The Come Bot flag
 	private static boolean enableBotPing;					// The bot ping flag
 	
@@ -35,7 +35,7 @@ public class JoshBot
 		// Read in some of the basic configs
 		token = config.getString("joshbot.token");
 		userId = config.getString("joshbot.userid");
-		devName = config.getString("joshbot.devname");
+		shutdownUser = config.getString("joshbot.shutdown.user");
 		enableComeBot = config.getBoolean("joshbot.enablecomebot");
 		enableBotPing = config.getBoolean("joshbot.enablebotping");
 		
@@ -58,7 +58,7 @@ public class JoshBot
 	
 	public static String getUserId() { return userId; }
 	
-	public static String getDevName() { return devName; }
+	public static String getShutdownUser() { return shutdownUser; }
 	
 	public static InputStream loadAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
 	
