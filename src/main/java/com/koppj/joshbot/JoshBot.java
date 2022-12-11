@@ -6,7 +6,6 @@ import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class JoshBot
 {
@@ -47,7 +46,6 @@ public class JoshBot
 		// Create the bot with the token, giving it the MESSAGE_CONTENT intent
 		joshBot = JDABuilder.createLight(token)
 				.addEventListeners(new SimpleCommands())
-				.enableIntents(GatewayIntent.MESSAGE_CONTENT)
 				.build();
 		
 		// Enable Come Bot based on the flag in the config
