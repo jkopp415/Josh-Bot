@@ -14,9 +14,11 @@ public class JoshBot
 	private static Configuration config;					// The config object
 	
 	private static String token;							// The bot's token
+	private static String userId;							// The bot's user id 
 	private static boolean devMode;							// The developer mode flag
 	private static boolean enableComeBot;					// The Come Bot flag
 	private static boolean enableSpaceFactsBot;				// The Space Facts Bot flag
+	private static boolean enableBotPing;					// The bot ping flag
 	
 	private static JDA joshBot;
 	
@@ -34,9 +36,11 @@ public class JoshBot
 		
 		// Read in some of the basic configs
 		token = config.getString("joshbot.token");
+		userId = config.getString("joshbot.userid");
 		devMode = config.getBoolean("joshbot.devmode");	
 		enableComeBot = config.getBoolean("joshbot.enablecomebot");
 		enableSpaceFactsBot = config.getBoolean("joshbot.enablespacefactsbot");
+		enableBotPing = config.getBoolean("joshbot.enablebotping");
 		
 		// Create the bot with the token, giving it the MESSAGE_CONTENT intent
 		joshBot = JDABuilder.createLight(token)
@@ -49,9 +53,14 @@ public class JoshBot
 		
 		// Enable Space Facts Bot based on the flag in the config
 		if (enableSpaceFactsBot) joshBot.addEventListener(new SpaceFactsBot());
+		
+		// Enable bot ping based on the flag in the config
+		if (enableBotPing) joshBot.addEventListener(new BotPing());
 	}
 	
 	public static InputStream loadAsset(String asset) { return JoshBot.class.getClassLoader().getResourceAsStream(asset); }
+	
+	public static String getUserId() { return userId; }
 	
 	public static boolean isDevMode() { return devMode; }
 	
