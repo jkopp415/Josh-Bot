@@ -52,6 +52,9 @@ public class JoshBot
 		
 		// Enable bot ping based on the flag in the config
 		if (enableBotPing) joshBot.addEventListener(new BotPing());
+		
+		// Initialize the space facts list
+		SpaceFacts.initSpaceFacts();
 	}
 	
 	public static JDA getJoshBot() { return joshBot; }

@@ -10,7 +10,7 @@ public class SpaceFacts
 {	
 	private static List<String> spaceFacts;
 	
-	public SpaceFacts()
+	public static void initSpaceFacts()
 	{
 		InputStream spaceFactsStream = JoshBot.loadAsset("assets/space_facts.txt");
 		
