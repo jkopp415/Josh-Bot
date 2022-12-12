@@ -55,6 +55,9 @@ public class JoshBot
 		
 		// Initialize the space facts list
 		SpaceFacts.initSpaceFacts();
+		
+		// Initialize the quotes list
+		Quotes.initQuotes();
 	}
 	
 	public static JDA getJoshBot() { return joshBot; }

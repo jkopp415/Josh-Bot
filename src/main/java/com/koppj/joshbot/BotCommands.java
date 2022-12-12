@@ -13,8 +13,9 @@ public class BotCommands extends ListenerAdapter
 		// The list of commands that the bot will have
 		JoshBot.getJoshBot().updateCommands().addCommands(
 				Commands.slash("joshping", "Pong!"),
-				Commands.slash("joshshutdown", "Shuts down the bot (if you're jkopp415)"),
-				Commands.slash("joshspacefact", "Gives a random space fact")
+				Commands.slash("joshshutdown", "Shuts down the bot (if you have permission)"),
+				Commands.slash("joshspacefact", "Gives a random space fact"),
+				Commands.slash("joshquote", "Gives a fun inspirational quote")
 		).queue();
 	}
 	
@@ -48,5 +49,8 @@ public class BotCommands extends ListenerAdapter
 		// Space fact command
 		if (event.getName().equals("joshspacefact"))
 			event.reply(SpaceFacts.getRandomSpaceFact()).queue();
+		
+		if (event.getName().equals("joshquote"))
+			event.reply(Quotes.getRandomQuote()).queue();
 	}
 }
