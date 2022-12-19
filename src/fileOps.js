@@ -16,6 +16,15 @@ function checkComeWords(message) {
     return comeWords.includes(message + '\r');
 }
 
+// ---------- SPACE FACTS BOT ----------
+
+const spaceFactsFile = fs.readFileSync(path.join(__dirname, '/assets/space_facts.txt'), 'utf-8');
+const spaceFacts = spaceFactsFile.split('\n');
+
+function getRandomSpaceFact() {
+    return spaceFacts[Math.floor(Math.random() * spaceFacts.length)];
+}
+
 // ---------- BOT PING ----------
 
 // The reaction image that is sent when the bot is pinged
@@ -30,7 +39,8 @@ const goodbyeCat = path.join(__dirname, '/assets/goodbye_cat.jpg');
 
 // Export consts/functions to index.js
 module.exports = { 
-    nerdCatImg, checkComeWords,
-    whoPingedMeGif,
-    goodbyeCat,
+    nerdCatImg, checkComeWords,             // Come Bot
+    getRandomSpaceFact,                     // Space Facts Bot
+    whoPingedMeGif,                         // Bot Ping
+    goodbyeCat,                             // Bot Shutdown
 }

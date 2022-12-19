@@ -37,6 +37,10 @@ const commands = [
         name: 'joshshutdown',
         description: 'Shuts down the bot (if you have permission)',
     },
+    {
+        name: 'joshspacefact',
+        description: 'Gives a random space fact',
+    },
 ];
 
 // Reload the list of commands
@@ -76,6 +80,11 @@ client.on('interactionCreate', interaction => {
                 client.destroy();
             })
         }
+    }
+
+    // Space fact bot command
+    if (interaction.commandName == 'joshspacefact') {
+        interaction.reply(fileOps.getRandomSpaceFact());
     }
 });
 
