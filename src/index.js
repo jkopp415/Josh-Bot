@@ -4,6 +4,15 @@ const { REST } = require('@discordjs/rest');
 
 // Import config items
 const { token, clientId, guildId } = require('../config.json');
+const { 
+    token, 
+    clientId, 
+    guildId, 
+    enableComeBot, 
+} = require('../config.json');
+
+// Import comebot functions
+const comebot  = require('./comebot.js');
 
 // Create the bot client
 const client = new Client({
@@ -22,6 +31,7 @@ const commands = [
     {
     },
 ];
+
 // Reload the list of commands
 (async () => {
     try {
@@ -48,4 +58,7 @@ client.on('interactionCreate', interaction => {
 
 // Handles normal message reactions
 client.on("messageCreate", message => {
+    // ComeBot
+    if (enableComeBot && comebot.checkComeWords(message.content))
+        message.reply({ files: [comebot.nerdCatImg] });
 });
