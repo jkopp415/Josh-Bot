@@ -14,4 +14,5 @@ function checkComeWords(message) {
     return comeWords.includes(message + '\r');
 }
 
+// Export consts/functions to index.js
 module.exports = { nerdCatImg, checkComeWords }

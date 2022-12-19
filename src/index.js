@@ -3,16 +3,17 @@ const { Client, GatewayIntentBits, Routes } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 
 // Import config items
-const { token, clientId, guildId } = require('../config.json');
 const { 
     token, 
     clientId, 
     guildId, 
     enableComeBot, 
+    enableBotPing 
 } = require('../config.json');
 
-// Import comebot functions
-const comebot  = require('./comebot.js');
+// Import external functions
+const comebot = require('./comebot.js');
+const botping = require('./botping.js');
 
 // Create the bot client
 const client = new Client({
@@ -61,4 +62,8 @@ client.on("messageCreate", message => {
     // ComeBot
     if (enableComeBot && comebot.checkComeWords(message.content))
         message.reply({ files: [comebot.nerdCatImg] });
+
+    // Bot Ping
+    if (enableBotPing && message.mentions.has(clientId))
+        message.reply({ files: [botping.whoPingedMeGif] });
 });
