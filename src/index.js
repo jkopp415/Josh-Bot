@@ -51,10 +51,18 @@ const commands = [
 (async () => {
     try {
         console.log('Started refreshing slash commands.');
+        
+        // Specific guild commands, used for development
         await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+            body: [],
+        });
+
+        // Global commands, used for production
+        await rest.put(Routes.applicationCommands(clientId), {
             body: commands,
         });
-        console.log('Successfully reloaded application (/) commands.');
+        
+        console.log('Successfully reloaded slash commands.');
     } catch (err) {
         console.log(err);
     }
