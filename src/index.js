@@ -7,11 +7,13 @@ const {
     token, 
     clientId, 
     guildId, 
+    shutdownUser, 
     enableComeBot, 
     enableBotPing 
 } = require('../config.json');
 
 // Import external functions
+const botshutdown = require('./botshutdown.js');
 const comebot = require('./comebot.js');
 const botping = require('./botping.js');
 
@@ -30,6 +32,12 @@ const rest = new REST({ version: '10' }).setToken(token);
 // The list of commands
 const commands = [
     {
+        name: 'joshping',
+        description: 'You know what it does...',
+    },
+    {
+        name: 'joshshutdown',
+        description: 'Shuts down the bot (if you have permission)',
     },
 ];
 
@@ -55,6 +63,22 @@ client.on('ready', () => console.log(`The bot has logged in as "${client.user.ta
 // Handles slash command reactions
 client.on('interactionCreate', interaction => {
     if (!interaction.isChatInputCommand) return;
+
+    // Ping command
+    if (interaction.commandName == 'joshping')
+        interaction.reply('Pong!');
+
+    // Bot shutdown command
+    if (interaction.commandName == 'joshshutdown') {
+        if (!interaction.user.name == shutdownUser)
+            interaction.reply({ content: 'You don\'t have the right permissions, stop it.', ephemeral: true });
+        else {
+            interaction.reply({ content: 'Shutting down...', ephemeral: true });
+            interaction.channel.send({ content: 'Shutting down. Bye!', files: [botshutdown.goodbyeCat] }).then(() => {
+                client.destroy();
+            })
+        }
+    }
 });
 
 // Handles normal message reactions
