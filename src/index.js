@@ -13,9 +13,7 @@ const {
 } = require('../config.json');
 
 // Import external functions
-const botshutdown = require('./botshutdown.js');
-const comebot = require('./comebot.js');
-const botping = require('./botping.js');
+const fileOps = require('./fileOps.js');
 
 // Create the bot client
 const client = new Client({
@@ -74,7 +72,7 @@ client.on('interactionCreate', interaction => {
             interaction.reply({ content: 'You don\'t have the right permissions, stop it.', ephemeral: true });
         else {
             interaction.reply({ content: 'Shutting down...', ephemeral: true });
-            interaction.channel.send({ content: 'Shutting down. Bye!', files: [botshutdown.goodbyeCat] }).then(() => {
+            interaction.channel.send({ content: 'Shutting down. Bye!', files: [fileOps.goodbyeCat] }).then(() => {
                 client.destroy();
             })
         }
@@ -84,10 +82,10 @@ client.on('interactionCreate', interaction => {
 // Handles normal message reactions
 client.on("messageCreate", message => {
     // ComeBot
-    if (enableComeBot && comebot.checkComeWords(message.content))
-        message.reply({ files: [comebot.nerdCatImg] });
+    if (enableComeBot && fileOps.checkComeWords(message.content))
+        message.reply({ files: [fileOps.nerdCatImg] });
 
     // Bot Ping
     if (enableBotPing && message.mentions.has(clientId))
-        message.reply({ files: [botping.whoPingedMeGif] });
+        message.reply({ files: [fileOps.whoPingedMeGif] });
 });
