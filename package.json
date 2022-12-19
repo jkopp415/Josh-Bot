@@ -1,0 +1,27 @@
+{
+  "name": "josh-bot",
+  "version": "2.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkopp415/Josh-Bot.git"
+  },
+  "author": "Josh K.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkopp415/Josh-Bot/issues"
+  },
+  "homepage": "https://github.com/jkopp415/Josh-Bot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^1.5.0",
+    "discord.js": "^14.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
