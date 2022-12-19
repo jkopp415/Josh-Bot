@@ -1,10 +1,9 @@
 {
   "name": "josh-bot",
   "version": "2.0.0",
-  "description": "",
+  "description": "This bot is simply a reflection of myself",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon ./src/index.js"
   },
   "repository": {
