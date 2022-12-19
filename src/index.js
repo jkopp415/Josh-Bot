@@ -41,6 +41,10 @@ const commands = [
         name: 'joshspacefact',
         description: 'Gives a random space fact',
     },
+    {
+        name: 'joshquote',
+        description: 'Gives a fun inspirational quote',
+    },
 ];
 
 // Reload the list of commands
@@ -85,6 +89,11 @@ client.on('interactionCreate', interaction => {
     // Space fact bot command
     if (interaction.commandName == 'joshspacefact') {
         interaction.reply(fileOps.getRandomSpaceFact());
+    }
+
+    // Quote bot command
+    if (interaction.commandName == 'joshquote') {
+        interaction.reply(fileOps.getRandomQuote());
     }
 });
 

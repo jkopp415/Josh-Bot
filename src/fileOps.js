@@ -25,6 +25,15 @@ function getRandomSpaceFact() {
     return spaceFacts[Math.floor(Math.random() * spaceFacts.length)];
 }
 
+// ---------- QUOTE BOT ----------
+
+const quotesFile = fs.readFileSync(path.join(__dirname, '/assets/quotes.txt'), 'utf-8');
+const quotes = quotesFile.split('\n');
+
+function getRandomQuote() {
+    return quotes[Math.floor(Math.random() * quotes.length)];
+}
+
 // ---------- BOT PING ----------
 
 // The reaction image that is sent when the bot is pinged
@@ -41,6 +50,7 @@ const goodbyeCat = path.join(__dirname, '/assets/goodbye_cat.jpg');
 module.exports = { 
     nerdCatImg, checkComeWords,             // Come Bot
     getRandomSpaceFact,                     // Space Facts Bot
+    getRandomQuote,                         // Quote Bot
     whoPingedMeGif,                         // Bot Ping
     goodbyeCat,                             // Bot Shutdown
 }
