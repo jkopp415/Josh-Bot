@@ -79,12 +79,12 @@ client.on('interactionCreate', interaction => {
     if (!interaction.isChatInputCommand) return;
 
     // Ping command
-    if (interaction.commandName == 'joshping')
+    if (interaction.commandName === 'joshping')
         interaction.reply('Pong!');
 
     // Bot shutdown command
-    if (interaction.commandName == 'joshshutdown') {
-        if (!interaction.user.name == shutdownUser)
+    if (interaction.commandName === 'joshshutdown') {
+        if (!interaction.user.name === shutdownUser)
             interaction.reply({ content: 'You don\'t have the right permissions, stop it.', ephemeral: true });
         else {
             interaction.reply({ content: 'Shutting down...', ephemeral: true });
@@ -95,12 +95,12 @@ client.on('interactionCreate', interaction => {
     }
 
     // Space fact bot command
-    if (interaction.commandName == 'joshspacefact') {
+    if (interaction.commandName === 'joshspacefact') {
         interaction.reply(fileOps.getRandomSpaceFact());
     }
 
     // Quote bot command
-    if (interaction.commandName == 'joshquote') {
+    if (interaction.commandName === 'joshquote') {
         interaction.reply(fileOps.getRandomQuote());
     }
 });
