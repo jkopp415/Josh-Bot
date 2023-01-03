@@ -2,9 +2,11 @@
   "name": "josh-bot",
   "version": "2.0.0",
   "description": "This bot is simply a reflection of myself",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon index.js",
+    "deploy": "node deploy-commands.js",
+    "deploy-start": "node deploy-commands.js && node ."
   },
   "repository": {
     "type": "git",
