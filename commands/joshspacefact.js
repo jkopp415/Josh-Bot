@@ -19,10 +19,22 @@ function getSpecificSpaceFact(factNum) {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('joshspacefact')
-        .setDescription('Gives a random space fact'),
+        .setDescription('Gives a random space fact')
+        .addIntegerOption(option =>
+            option.setName('number')
+                .setDescription(`The specific quote you wish to print, between 1 and ${spaceFacts.length + 1}`)
+                .setRequired(false)
+                .setMinValue(1)
+                .setMaxValue(spaceFacts.length + 1)
+        ),
     async execute(interaction) {
 
-        await interaction.reply(getRandomSpaceFact());
+        const spaceFactNum = interaction.options.getInteger('number');
+        if (spaceFactNum != null) {
+            await interaction.reply(getSpecificSpaceFact(spaceFactNum - 1));
+        } else {
+            await interaction.reply(getRandomSpaceFact());
+        }
 
     },
 };
