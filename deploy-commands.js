@@ -18,12 +18,12 @@ const rest = new REST({ version: '10' }).setToken(token);
 
        const guildData = await rest.put(
                Routes.applicationGuildCommands(clientId, guildId),
-               { body: commands },
+               { body: [] },
        );
 
        const globalData = await rest.put(
                Routes.applicationCommands(clientId),
-               { body: [] }
+               { body: commands }
        );
 
        console.log(`Successfully reloaded ${guildData.length} guild slash commands and ${globalData.length} global slash commands.`);
