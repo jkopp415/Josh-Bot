@@ -2,6 +2,9 @@
 const { Client, GatewayIntentBits, Routes } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 
+// Import the package.json file
+const pjson = require('../package.json')
+
 // Import config items
 const { 
     token, 
@@ -44,6 +47,10 @@ const commands = [
     {
         name: 'joshquote',
         description: 'Gives a fun inspirational quote',
+    },
+    {
+        name: 'joshversion',
+        description: 'Returns the version of the bot',
     },
 ];
 
@@ -102,6 +109,11 @@ client.on('interactionCreate', interaction => {
     // Quote bot command
     if (interaction.commandName === 'joshquote') {
         interaction.reply(fileOps.getRandomQuote());
+    }
+
+    // Bot version command
+    if (interaction.commandName === 'joshversion') {
+        interaction.reply(`I'm currently on version ${pjson.version}`)
     }
 });
 

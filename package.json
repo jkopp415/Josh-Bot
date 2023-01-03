@@ -4,7 +4,7 @@
   "description": "This bot is simply a reflection of myself",
   "main": "src/index.js",
   "scripts": {
-    "start:dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
