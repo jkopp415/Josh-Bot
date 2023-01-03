@@ -22,10 +22,10 @@ module.exports = {
         .setDescription('Gives a fun inspirational quote')
         .addIntegerOption(option =>
             option.setName('number')
-                .setDescription(`The specific quote you wish to print, between 1 and ${quotes.length + 1}`)
+                .setDescription(`The specific quote you wish to print, between 1 and ${quotes.length}`)
                 .setRequired(false)
                 .setMinValue(1)
-                .setMaxValue(quotes.length + 1)
+                .setMaxValue(quotes.length)
         ),
     async execute(interaction) {
 

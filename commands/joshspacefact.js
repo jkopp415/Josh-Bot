@@ -22,10 +22,10 @@ module.exports = {
         .setDescription('Gives a random space fact')
         .addIntegerOption(option =>
             option.setName('number')
-                .setDescription(`The specific quote you wish to print, between 1 and ${spaceFacts.length + 1}`)
+                .setDescription(`The specific quote you wish to print, between 1 and ${spaceFacts.length}`)
                 .setRequired(false)
                 .setMinValue(1)
-                .setMaxValue(spaceFacts.length + 1)
+                .setMaxValue(spaceFacts.length)
         ),
     async execute(interaction) {
 
