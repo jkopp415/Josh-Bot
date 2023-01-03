@@ -16,17 +16,17 @@ const rest = new REST({ version: '10' }).setToken(token);
    try {
        console.log(`Started refreshing ${commands.length} slash commands.`);
 
-       const guildData = await rest.put(
-               Routes.applicationGuildCommands(clientId, guildId),
-               { body: [] },
-       );
+//       const guildData = await rest.put(
+//               Routes.applicationGuildCommands(clientId, guildId),
+//               { body: [] },
+//       );
+//       console.log(`Successfully reloaded ${guildData.length} guild slash commands.`);
 
        const globalData = await rest.put(
                Routes.applicationCommands(clientId),
                { body: commands }
        );
-
-       console.log(`Successfully reloaded ${guildData.length} guild slash commands and ${globalData.length} global slash commands.`);
+       console.log(`Successfully reloaded ${globalData.length} global slash commands.`);
    } catch (error) {
        console.error(error);
    }
