@@ -10,14 +10,16 @@ const { enableComeBot } = require('../config.json');
 
 // Read in and parse the list of come words
 const comeWordsFile = fs.readFileSync(path.join(__dirname, '../assets/come_words.txt'), 'utf-8');
-const comeWords = comeWordsFile.split('\n');
+var comeWords = comeWordsFile.split('\n');
+comeWords = comeWords.map(comeWord => comeWord.replace('\r', ''));
 
 // The reaction image for the come message
 const nerdCatImg = path.join(__dirname, '../assets/nerd_cat.jpg');
 
 // Check if the given message was found in the come words list
 function checkComeWords(message) {
-    return comeWords.includes(message + '\r');
+    message = message.replace(/(\r\n|\n|\r)/gm, "");
+    return comeWords.includes(message);
 }
 
 module.exports = {
