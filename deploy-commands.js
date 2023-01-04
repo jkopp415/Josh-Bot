@@ -1,5 +1,5 @@
 const { REST, Routes } = require('discord.js');
-const { token, clientId, guildId } = require('./config.json');
+const { token, clientId } = require('./config.json');
 const fs = require('node:fs');
 
 const commands = [];
@@ -10,17 +10,12 @@ for (const file of commandFiles) {
     commands.push(command.data.toJSON());
 }
 
+// noinspection JSClosureCompilerSyntax
 const rest = new REST({ version: '10' }).setToken(token);
 
 (async () => {
    try {
        console.log(`Started refreshing ${commands.length} slash commands.`);
-
-//       const guildData = await rest.put(
-//               Routes.applicationGuildCommands(clientId, guildId),
-//               { body: [] },
-//       );
-//       console.log(`Successfully reloaded ${guildData.length} guild slash commands.`);
 
        const globalData = await rest.put(
                Routes.applicationCommands(clientId),

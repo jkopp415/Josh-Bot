@@ -1,8 +1,8 @@
-// Import neccessary Node functions
+// Import necessary Node functions
 const fs = require('fs');
 const path = require('path');
 
-// Import neccessary discord.js functions
+// Import necessary discord.js functions
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
 // Import config items
@@ -20,7 +20,7 @@ const client = new Client({
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
-// Dynamically retreive the event files
+// Dynamically retrieve the event files
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
     const event = require(filePath);
@@ -36,7 +36,7 @@ client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-// Dynamically retreive the command files
+// Dynamically retrieve the command files
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath)
