@@ -22,7 +22,7 @@ module.exports = {
         } else {
             interaction.reply({ content: 'Shutting down...', ephemeral: true });
             interaction.channel.send({ content: 'Shutting down. Bye!', files: [goodbyeCat] }).then(() => {
-                process.exit();
+                interaction.client.destroy();
             });
         }
 
