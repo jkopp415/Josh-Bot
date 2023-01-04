@@ -19,7 +19,7 @@ function getSpecificQuote(quoteNum) {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('joshquote')
-        .setDescription('Gives a fun inspirational quote')
+        .setDescription('Replies with a fun inspirational quote')
         .addIntegerOption(option =>
             option.setName('number')
                 .setDescription(`The specific quote you wish to print, between 1 and ${quotes.length}`)

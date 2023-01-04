@@ -10,7 +10,7 @@ const reactionImgsPath = path.join(__dirname, '../assets/reactions');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('joshreaction')
-        .setDescription('Replies with a specified reaction image.')
+        .setDescription('Replies with a specified reaction image')
         .addStringOption(option =>
             option.setName('image')
                 .setDescription('The name of the reaction image to send')

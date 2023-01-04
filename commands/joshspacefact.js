@@ -19,7 +19,7 @@ function getSpecificSpaceFact(factNum) {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('joshspacefact')
-        .setDescription('Gives a random space fact')
+        .setDescription('Replies with a random space fact')
         .addIntegerOption(option =>
             option.setName('number')
                 .setDescription(`The specific quote you wish to print, between 1 and ${spaceFacts.length}`)
