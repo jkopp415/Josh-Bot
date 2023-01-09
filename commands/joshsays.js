@@ -15,7 +15,7 @@ module.exports = {
         ),
     async execute(interaction) {
 
-        if (!interaction.user.name === adminUser) {
+        if (interaction.user.username !== adminUser) {
             interaction.reply({ content: 'You don\'t have the right permissions, stop it.', ephemeral: true });
         } else {
             interaction.reply({ content: 'Sending message...', ephemeral: true });

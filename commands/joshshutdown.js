@@ -17,7 +17,7 @@ module.exports = {
     async execute(interaction) {
 
         // If the user's name equals the "adminUser" property, then the shutdown command will work
-        if (!interaction.user.name === adminUser) {
+        if (interaction.user.username !== adminUser) {
             interaction.reply({ content: 'You don\'t have the right permissions, stop it.', ephemeral: true });
         } else {
             interaction.reply({ content: 'Shutting down...', ephemeral: true });
