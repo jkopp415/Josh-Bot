@@ -6,20 +6,20 @@ const path = require('path');
 const { Events } = require('discord.js');
 
 // Import config properties
-const { enableComeBot } = require('../config.json');
+const { enableReactBot } = require('../config.json');
 
 // Read in and parse the list of come words
-const comeWordsFile = fs.readFileSync(path.join(__dirname, '../assets/come_words.txt'), 'utf-8');
-var comeWords = comeWordsFile.split('\n');
-comeWords = comeWords.map(comeWord => comeWord.replace('\r', ''));
+const reactWordsFile = fs.readFileSync(path.join(__dirname, '../assets/react_words.txt'), 'utf-8');
+var reactWords = reactWordsFile.split('\n');
+reactWords = reactWords.map(reactWord => reactWord.replace('\r', ''));
 
 // The reaction image for the come message
 const nerdCatImg = path.join(__dirname, '../assets/nerd_cat.jpg');
 
 // Check if the given message was found in the come words list
-function checkComeWords(message) {
+function checkReactWords(message) {
     message = message.replace(/(\r\n|\n|\r)/gm, "");
-    return comeWords.includes(message);
+    return reactWords.includes(message);
 }
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
     async execute(interaction) {
 
         // If ComeBot is enabled and the message is one of the come words, respond with the image
-        if (enableComeBot && checkComeWords(interaction.content))
+        if (enableReactBot && checkReactWords(interaction.content))
             await interaction.reply({ files: [nerdCatImg] });
 
     }
