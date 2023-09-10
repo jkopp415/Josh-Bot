@@ -15,7 +15,7 @@ module.exports = {
     async execute(interaction) {
 
         // If ComeBot is enabled and the message is one of the come words, respond with the image
-        if (enableBotPing && interaction.mentions.has(clientId))
+        if (enableBotPing && interaction.mentions.has(clientId) && !interaction.mentions.everyone)
             await interaction.reply({ files: [whoPingedMeGif] });
 
     }
