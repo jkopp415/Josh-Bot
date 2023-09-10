@@ -1,6 +1,6 @@
 {
-  "name": "josh-bot",
-  "version": "2.0.0",
+  "name": "josh-bot-kxr",
+  "version": "1.0.0",
   "description": "This bot is simply a reflection of myself",
   "main": "index.js",
   "scripts": {
