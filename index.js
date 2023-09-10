@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Import necessary discord.js functions
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 
 // Import config items
 const { token } = require('./config.json');
@@ -13,8 +13,15 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.MessageContent,
     ], 
+    partials: [
+        Partials.Message,
+        Partials.Channel,
+        Partials.Reaction
+    ]
 });
 
 const eventsPath = path.join(__dirname, 'events');
