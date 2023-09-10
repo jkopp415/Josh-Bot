@@ -18,7 +18,7 @@ function getSpecificQuote(quoteNum) {
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('joshquote')
+        .setName('josh-quote')
         .setDescription('Replies with a fun inspirational quote')
         .addIntegerOption(option =>
             option.setName('number')

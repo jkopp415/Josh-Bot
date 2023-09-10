@@ -18,7 +18,7 @@ function getSpecificSpaceFact(factNum) {
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('joshspacefact')
+        .setName('josh-space-fact')
         .setDescription('Replies with a random space fact')
         .addIntegerOption(option =>
             option.setName('number')

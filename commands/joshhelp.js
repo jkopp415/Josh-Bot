@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('joshhelp')
+        .setName('josh-help')
         .setDescription('Provides you with a bit of info about JoshBot\'s commands'),
     async execute(interaction) {
 

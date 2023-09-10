@@ -6,7 +6,7 @@ const { adminUser } = require('../config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('joshsays')
+        .setName('josh-says')
         .setDescription('Makes the bot say something (if you have permission)')
         .addStringOption(option =>
             option.setName('message')

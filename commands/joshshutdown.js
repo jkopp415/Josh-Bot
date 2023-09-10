@@ -12,7 +12,7 @@ const goodbyeCat = path.join(__dirname, '../assets/goodbye_cat.jpg');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('joshshutdown')
+        .setName('josh-shutdown')
         .setDescription('Shuts down the bot (if you have permission)'),
     async execute(interaction) {
 
