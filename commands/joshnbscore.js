@@ -45,14 +45,13 @@ module.exports = {
 
         // Get a list of all the members from the server and filter out any bots
         let memberList = await interaction.guild.members.fetch();
-        memberList = memberList.filter((member) => !member.user.bot);
 
         // Create empty variables for the response string and member in which to check for nerdbobs
         let responseString = '';
         let checkedMember = null;
 
         if ((userArg = interaction.options.getUser('username')) != null) {
-            // If the user argument is not null, run the query on the member matching the user argument
+            // Run the query on the member matching the user argument
             checkedMember = memberList.find(m => {
                 return m.user === userArg;
             });
